@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Manage with QR
 
-## Getting Started
+店舗商品管理を簡略化し、接客コストを削減するためのQRコード活用システムです。
 
-First, run the development server:
+## 概要
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+このプロジェクトは、実店舗における商品管理と顧客対応を効率化することを目的としています。
+各商品に紐付けられたQRコードを通じて、顧客は自身のスマートフォンで詳細情報を確認でき、試着や購入の意思表示をスタッフに通知することができます。
+
+## 主な機能
+
+### 管理画面 (Admin)
+- **商品管理**: 商品の一覧表示、登録、編集、削除
+- **QRコード**: 商品ごとの印刷用QRコード表示
+- **通知**: 顧客からの試着・購入リクエストの受信
+
+### 顧客用画面 (Client)
+- **商品詳細**: QRコード読み取りによる商品情報の閲覧
+- **アクション**: 「試着したい」「購入したい」ボタンによるスタッフ呼び出し
+
+## 技術スタック
+
+- **Frontend**: Next.js (React), TypeScript, Tailwind CSS
+- **Backend**: Go (予定)
+- **Database**: PostgreSQL (予定)
+- **ORM**: Bun (Go) (予定)
+
+## プロジェクト構成
+
+```
+.
+├── docs/           # 要件定義、設計ドキュメント
+├── frontend/       # Next.js フロントエンドアプリケーション
+└── README.md       # 本ファイル
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 開発フロー
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+現在は **Phase 1: フロントエンド先行開発** の段階です。
+Next.js 上にモックAPIを実装し、UI/UXの検証を行っています。
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **Frontend**: Next.jsでAPIを含むフロントエンドを構築 (Current)
+2. **Backend**: Go言語によるAPIサーバーの構築
+3. **Integration**: フロントエンドとバックエンドの統合
 
-## Learn More
+## セットアップ (Frontend)
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+ブラウザで [http://localhost:3000](http://localhost:3000) を開いて確認してください。
