@@ -2,13 +2,13 @@
 
 店舗商品管理を簡略化し、接客コストを削減するためのQRコード活用システムです。
 
-![1](https://raw.githubusercontent.com/howlrs/qr-tryon/image/for-readme/images/1.png)
-![2](https://raw.githubusercontent.com/howlrs/qr-tryon/image/for-readme/images/2.png)
-![3](https://raw.githubusercontent.com/howlrs/qr-tryon/image/for-readme/images/3.png)
-![4](https://raw.githubusercontent.com/howlrs/qr-tryon/image/for-readme/images/4.png)
-![5](https://raw.githubusercontent.com/howlrs/qr-tryon/image/for-readme/images/5.png)
-![6](https://raw.githubusercontent.com/howlrs/qr-tryon/image/for-readme/images/6.png)
-![7](https://raw.githubusercontent.com/howlrs/qr-tryon/image/for-readme/images/7.png)  
+![1](https://raw.githubusercontent.com/howlrs/qr-tryon/image/for-readme/images/1.png)  
+![2](https://raw.githubusercontent.com/howlrs/qr-tryon/image/for-readme/images/2.png)  
+![3](https://raw.githubusercontent.com/howlrs/qr-tryon/image/for-readme/images/3.png)  
+![4](https://raw.githubusercontent.com/howlrs/qr-tryon/image/for-readme/images/4.png)  
+![5](https://raw.githubusercontent.com/howlrs/qr-tryon/image/for-readme/images/5.png)  
+![6](https://raw.githubusercontent.com/howlrs/qr-tryon/image/for-readme/images/6.png)  
+![7](https://raw.githubusercontent.com/howlrs/qr-tryon/image/for-readme/images/7.png)    
 
 
 ## 概要
