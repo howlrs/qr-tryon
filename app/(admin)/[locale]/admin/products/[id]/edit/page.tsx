@@ -1,14 +1,16 @@
 'use client';
 
 import { useState, useEffect, use } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { Link, useRouter } from '@/i18n/routing';
 import { ArrowLeft } from 'lucide-react';
 import ProductForm, { ProductFormData } from '@/components/admin/ProductForm';
 import { mockProducts } from '@/lib/mockData';
+import { useTranslations } from 'next-intl';
 
 export default function EditProductPage({ params }: { params: Promise<{ id: string }> }) {
     const router = useRouter();
+    const t = useTranslations('Admin');
+    const tCommon = useTranslations('Common');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [initialData, setInitialData] = useState<ProductFormData | null>(null);
     const [isLoading, setIsLoading] = useState(true);
@@ -79,15 +81,15 @@ export default function EditProductPage({ params }: { params: Promise<{ id: stri
     };
 
     if (isLoading) {
-        return <div className="p-8 text-center">Loading product...</div>;
+        return <div className="p-8 text-center">{tCommon('loading')}</div>;
     }
 
     if (!initialData) {
         return (
             <div className="p-8 text-center space-y-4">
-                <h1 className="text-2xl font-bold">Product not found</h1>
+                <h1 className="text-2xl font-bold">{t('noProducts')}</h1>
                 <Link href="/admin" className="text-primary hover:underline">
-                    Back to Admin
+                    {t('products')}
                 </Link>
             </div>
         );
@@ -104,8 +106,8 @@ export default function EditProductPage({ params }: { params: Promise<{ id: stri
                     <ArrowLeft size={20} />
                 </Link>
                 <div>
-                    <h1 className="text-3xl font-bold tracking-tight">Edit Product</h1>
-                    <p className="text-muted-foreground">Update product details, variants, and images</p>
+                    <h1 className="text-3xl font-bold tracking-tight">{t('editProduct')}</h1>
+                    <p className="text-muted-foreground">{t('description')}</p>
                 </div>
             </div>
 
@@ -113,7 +115,7 @@ export default function EditProductPage({ params }: { params: Promise<{ id: stri
                 initialData={initialData}
                 onSubmit={handleSubmit}
                 isSubmitting={isSubmitting}
-                submitLabel="Update Product"
+                submitLabel={t('update')}
             />
         </div>
     );

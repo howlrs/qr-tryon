@@ -4,12 +4,14 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { ProductWithDetails, ProductVariant } from '@/types';
 import { ShoppingBag, Shirt } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 interface ProductDetailClientProps {
     product: ProductWithDetails;
 }
 
 export default function ProductDetailClient({ product }: ProductDetailClientProps) {
+    const t = useTranslations('ProductDetail');
     const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(
         product.variants[0] || null
     );
@@ -46,16 +48,16 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
             if (!res.ok) {
                 const data = await res.json();
                 if (res.status === 429) {
-                    alert(data.message || 'Please wait before sending another request.');
+                    alert(data.message || t('pleaseWait'));
                     return;
                 }
                 throw new Error('Request failed');
             }
 
-            alert(`Try On request sent for ${product.name} (${selectedVariant.name})`);
+            alert(t('tryOnSent', { product: product.name, variant: selectedVariant.name }));
         } catch (error) {
             console.error('Failed to send try on request:', error);
-            alert('Failed to send request');
+            alert(t('failedToSend'));
         }
     };
 
@@ -78,16 +80,16 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
             if (!res.ok) {
                 const data = await res.json();
                 if (res.status === 429) {
-                    alert(data.message || 'Please wait before sending another request.');
+                    alert(data.message || t('pleaseWait'));
                     return;
                 }
                 throw new Error('Request failed');
             }
 
-            alert(`Purchase request sent for ${product.name} (${selectedVariant.name})`);
+            alert(t('purchaseSent', { product: product.name, variant: selectedVariant.name }));
         } catch (error) {
             console.error('Failed to send purchase request:', error);
-            alert('Failed to send request');
+            alert(t('failedToSend'));
         }
     };
 
@@ -106,7 +108,7 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
                         />
                     ) : (
                         <div className="w-full h-full flex items-center justify-center text-muted-foreground">
-                            No Image
+                            {t('noImage')}
                         </div>
                     )}
                 </div>
@@ -145,7 +147,7 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
                 {/* Variant Selector */}
                 <div className="space-y-4">
                     <h3 className="font-medium text-sm uppercase tracking-wider text-muted-foreground">
-                        Select Variant
+                        {t('selectVariant')}
                     </h3>
                     <div className="grid grid-cols-2 gap-3">
                         {product.variants.map((variant) => (
@@ -159,7 +161,7 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
                             >
                                 <div className="font-medium">{variant.name}</div>
                                 <div className="text-sm text-muted-foreground">
-                                    Stock: {variant.stock > 0 ? variant.stock : 'Out of Stock'}
+                                    {variant.stock > 0 ? t('stock', { stock: variant.stock }) : t('outOfStock')}
                                 </div>
                             </button>
                         ))}
@@ -174,7 +176,7 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
                         className="flex-1 flex items-center justify-center gap-2 bg-white border-2 border-primary text-primary px-8 py-4 rounded-full font-bold text-lg hover:bg-primary/5 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                     >
                         <Shirt size={24} />
-                        Try On
+                        {t('tryOn')}
                     </button>
                     <button
                         onClick={handlePurchase}
@@ -182,7 +184,7 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
                         className="flex-1 flex items-center justify-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-full font-bold text-lg hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity shadow-lg shadow-primary/20"
                     >
                         <ShoppingBag size={24} />
-                        Purchase
+                        {t('purchase')}
                     </button>
                 </div>
 
@@ -197,8 +199,8 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
                             </div>
                         </div>
                         <div>
-                            <p className="font-medium text-sm">Scan to view on mobile</p>
-                            <p className="text-xs text-muted-foreground">Use this QR code to open this product page on your phone.</p>
+                            <p className="font-medium text-sm">{t('scanToView')}</p>
+                            <p className="text-xs text-muted-foreground">{t('scanDescription')}</p>
                         </div>
                     </div>
                 </div>

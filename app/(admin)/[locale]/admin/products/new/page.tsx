@@ -1,13 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { Link, useRouter } from '@/i18n/routing';
 import { ArrowLeft } from 'lucide-react';
 import ProductForm, { ProductFormData } from '@/components/admin/ProductForm';
+import { useTranslations } from 'next-intl';
 
 export default function AddProductPage() {
     const router = useRouter();
+    const t = useTranslations('Admin');
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleSubmit = async (data: ProductFormData) => {
@@ -48,15 +49,15 @@ export default function AddProductPage() {
                     <ArrowLeft size={20} />
                 </Link>
                 <div>
-                    <h1 className="text-3xl font-bold tracking-tight">Add New Product</h1>
-                    <p className="text-muted-foreground">Create a new product with variants and images</p>
+                    <h1 className="text-3xl font-bold tracking-tight">{t('newProduct')}</h1>
+                    <p className="text-muted-foreground">{t('description')}</p>
                 </div>
             </div>
 
             <ProductForm
                 onSubmit={handleSubmit}
                 isSubmitting={isSubmitting}
-                submitLabel="Create Product"
+                submitLabel={t('create')}
             />
         </div>
     );

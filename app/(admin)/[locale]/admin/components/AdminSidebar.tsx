@@ -1,12 +1,13 @@
 'use client';
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { Link, usePathname } from '@/i18n/routing';
 import { LayoutDashboard, Package, Settings, LogOut } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 export default function AdminSidebar() {
     const pathname = usePathname();
+    const t = useTranslations('Admin');
     const [orderCount, setOrderCount] = useState(0);
 
     useEffect(() => {
@@ -37,7 +38,7 @@ export default function AdminSidebar() {
     return (
         <aside className="w-64 bg-white border-r border-border fixed h-full hidden md:flex flex-col">
             <div className="p-6 border-b border-border">
-                <h2 className="text-xl font-bold tracking-tight">Store Admin</h2>
+                <h2 className="text-xl font-bold tracking-tight">{t('title')}</h2>
             </div>
             <nav className="flex-1 p-4 space-y-1">
                 <Link
@@ -48,7 +49,7 @@ export default function AdminSidebar() {
                         }`}
                 >
                     <Package size={20} />
-                    Products
+                    {t('products')}
                 </Link>
                 <Link
                     href="/admin/orders"
@@ -59,7 +60,7 @@ export default function AdminSidebar() {
                 >
                     <div className="flex items-center gap-3">
                         <LayoutDashboard size={20} />
-                        Orders
+                        {t('orders')}
                     </div>
                     {orderCount > 0 && (
                         <span className="bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
@@ -75,13 +76,13 @@ export default function AdminSidebar() {
                         }`}
                 >
                     <Settings size={20} />
-                    Settings
+                    {t('settings')}
                 </Link>
             </nav>
             <div className="p-4 border-t border-border">
                 <button className="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg text-red-500 hover:bg-red-50 w-full transition-colors">
                     <LogOut size={20} />
-                    Logout
+                    {t('logout')}
                 </button>
             </div>
         </aside>

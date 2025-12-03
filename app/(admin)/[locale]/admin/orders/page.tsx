@@ -1,8 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 export default function OrdersPage() {
+    const t = useTranslations('Admin');
     const [orders, setOrders] = useState<any[]>([]);
 
     useEffect(() => {
@@ -39,12 +41,12 @@ export default function OrdersPage() {
     return (
         <div className="space-y-6">
             <div className="flex items-center justify-between">
-                <h1 className="text-3xl font-bold tracking-tight">Orders</h1>
+                <h1 className="text-3xl font-bold tracking-tight">{t('ordersTitle')}</h1>
                 <button
                     onClick={markAllAsRead}
                     className="px-4 py-2 bg-white border border-border rounded-lg text-sm font-medium hover:bg-muted transition-colors"
                 >
-                    Clear Notifications
+                    {t('markAsRead')}
                 </button>
             </div>
 
@@ -53,17 +55,17 @@ export default function OrdersPage() {
                     <thead className="bg-muted/50 border-b border-border">
                         <tr>
                             <th className="text-left p-4 font-medium text-muted-foreground">ID</th>
-                            <th className="text-left p-4 font-medium text-muted-foreground">Product</th>
-                            <th className="text-left p-4 font-medium text-muted-foreground">Variant</th>
+                            <th className="text-left p-4 font-medium text-muted-foreground">{t('productName')}</th>
+                            <th className="text-left p-4 font-medium text-muted-foreground">{t('variantName')}</th>
                             <th className="text-left p-4 font-medium text-muted-foreground">Type</th>
-                            <th className="text-left p-4 font-medium text-muted-foreground">Date</th>
+                            <th className="text-left p-4 font-medium text-muted-foreground">{t('time')}</th>
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-border">
                         {orders.length === 0 ? (
                             <tr>
                                 <td colSpan={5} className="p-8 text-center text-muted-foreground">
-                                    No orders found
+                                    {t('noOrders')}
                                 </td>
                             </tr>
                         ) : (
@@ -77,7 +79,7 @@ export default function OrdersPage() {
                                             ? 'bg-green-100 text-green-800'
                                             : 'bg-blue-100 text-blue-800'
                                             }`}>
-                                            {order.type === 'purchase' ? 'Purchase' : 'Try On'}
+                                            {order.type === 'purchase' ? t('purchase') : t('tryOn')}
                                         </span>
                                     </td>
                                     <td className="p-4 text-muted-foreground">

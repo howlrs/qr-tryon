@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Plus, Trash2, Save } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 export interface VariantFormData {
     name: string;
@@ -36,8 +37,11 @@ export default function ProductForm({
     initialData,
     onSubmit,
     isSubmitting,
-    submitLabel = 'Save Product'
+    submitLabel
 }: ProductFormProps) {
+    const t = useTranslations('Admin');
+    const tCommon = useTranslations('Common');
+
     // Form State
     const [name, setName] = useState(initialData?.name || '');
     const [description, setDescription] = useState(initialData?.description || '');
@@ -94,7 +98,7 @@ export default function ProductForm({
                 <h2 className="text-xl font-semibold">Basic Details</h2>
                 <div className="grid gap-4">
                     <div className="space-y-2">
-                        <label htmlFor="name" className="text-sm font-medium">Product Name</label>
+                        <label htmlFor="name" className="text-sm font-medium">{t('productName')}</label>
                         <input
                             id="name"
                             type="text"
@@ -106,7 +110,7 @@ export default function ProductForm({
                         />
                     </div>
                     <div className="space-y-2">
-                        <label htmlFor="description" className="text-sm font-medium">Description</label>
+                        <label htmlFor="description" className="text-sm font-medium">{t('description')}</label>
                         <textarea
                             id="description"
                             required
@@ -122,14 +126,14 @@ export default function ProductForm({
             {/* Variants */}
             <div className="bg-white border border-border rounded-xl p-6 shadow-sm space-y-4">
                 <div className="flex items-center justify-between">
-                    <h2 className="text-xl font-semibold">Variants</h2>
+                    <h2 className="text-xl font-semibold">{t('variants')}</h2>
                     <button
                         type="button"
                         onClick={handleAddVariant}
                         className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80"
                     >
                         <Plus size={16} />
-                        Add Variant
+                        {t('addVariant')}
                     </button>
                 </div>
 
@@ -137,7 +141,7 @@ export default function ProductForm({
                     {variants.map((variant, index) => (
                         <div key={index} className="grid grid-cols-12 gap-4 items-start p-4 bg-muted/30 rounded-lg border border-border/50">
                             <div className="col-span-3 space-y-1">
-                                <label className="text-xs font-medium text-muted-foreground">Name</label>
+                                <label className="text-xs font-medium text-muted-foreground">{t('variantName')}</label>
                                 <input
                                     type="text"
                                     required
@@ -159,7 +163,7 @@ export default function ProductForm({
                                 />
                             </div>
                             <div className="col-span-2 space-y-1">
-                                <label className="text-xs font-medium text-muted-foreground">Price</label>
+                                <label className="text-xs font-medium text-muted-foreground">{t('variantPrice')}</label>
                                 <input
                                     type="number"
                                     required
@@ -171,7 +175,7 @@ export default function ProductForm({
                                 />
                             </div>
                             <div className="col-span-2 space-y-1">
-                                <label className="text-xs font-medium text-muted-foreground">Stock</label>
+                                <label className="text-xs font-medium text-muted-foreground">{t('variantStock')}</label>
                                 <input
                                     type="number"
                                     required
@@ -220,14 +224,14 @@ export default function ProductForm({
             {/* Images */}
             <div className="bg-white border border-border rounded-xl p-6 shadow-sm space-y-4">
                 <div className="flex items-center justify-between">
-                    <h2 className="text-xl font-semibold">Images</h2>
+                    <h2 className="text-xl font-semibold">{t('image')}</h2>
                     <button
                         type="button"
                         onClick={handleAddImage}
                         className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80"
                     >
                         <Plus size={16} />
-                        Add Image
+                        {t('addImage')}
                     </button>
                 </div>
 
@@ -246,7 +250,7 @@ export default function ProductForm({
                                 />
                             </div>
                             <div className="col-span-4 space-y-1">
-                                <label className="text-xs font-medium text-muted-foreground">Alt Text</label>
+                                <label className="text-xs font-medium text-muted-foreground">{t('altText')}</label>
                                 <input
                                     type="text"
                                     value={image.alt_text}
@@ -256,7 +260,7 @@ export default function ProductForm({
                                 />
                             </div>
                             <div className="col-span-1 space-y-1">
-                                <label className="text-xs font-medium text-muted-foreground">Order</label>
+                                <label className="text-xs font-medium text-muted-foreground">{t('displayOrder')}</label>
                                 <input
                                     type="number"
                                     min="1"
@@ -289,7 +293,7 @@ export default function ProductForm({
                     className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                     <Save size={20} />
-                    {isSubmitting ? 'Saving...' : submitLabel}
+                    {isSubmitting ? tCommon('loading') : (submitLabel || t('save'))}
                 </button>
             </div>
         </form>
