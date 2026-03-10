@@ -2,7 +2,8 @@
     "Home": {
         "title": "Manage with QR",
         "description": "Streamline your store management and enhance customer experience with our QR-based solution.",
-        "viewProducts": "View Products"
+        "viewProducts": "View Products",
+        "adminPanel": "Admin Panel"
     },
     "Products": {
         "title": "Our Collection",

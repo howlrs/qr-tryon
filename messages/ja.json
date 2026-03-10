@@ -2,7 +2,8 @@
     "Home": {
         "title": "QRで管理",
         "description": "QRベースのソリューションで店舗管理を効率化し、顧客体験を向上させます。",
-        "viewProducts": "商品を見る"
+        "viewProducts": "商品を見る",
+        "adminPanel": "管理画面"
     },
     "Products": {
         "title": "コレクション",
