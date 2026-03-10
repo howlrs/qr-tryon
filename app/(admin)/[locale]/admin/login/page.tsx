@@ -96,6 +96,14 @@ export default function LoginPage() {
                         {loading ? t('loggingIn') : t('login')}
                     </button>
                 </form>
+
+                <div className="mt-6 p-4 bg-muted/50 rounded-lg border border-border">
+                    <p className="text-xs font-medium text-muted-foreground mb-2">Demo credentials</p>
+                    <div className="text-sm text-muted-foreground space-y-1">
+                        <p>Email: <code className="bg-muted px-1.5 py-0.5 rounded text-foreground font-mono text-xs">admin@store.local</code></p>
+                        <p>Password: <code className="bg-muted px-1.5 py-0.5 rounded text-foreground font-mono text-xs">admin123</code></p>
+                    </div>
+                </div>
             </div>
         </div>
     );
