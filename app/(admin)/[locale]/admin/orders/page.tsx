@@ -2,9 +2,11 @@
 
 import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { useToast } from '@/lib/hooks/useToast';
 
 export default function OrdersPage() {
     const t = useTranslations('Admin');
+    const { toast } = useToast();
     const [orders, setOrders] = useState<any[]>([]);
 
     useEffect(() => {
@@ -17,11 +19,12 @@ export default function OrdersPage() {
                 }
             } catch (error) {
                 console.error('Failed to fetch orders:', error);
+                toast('注文の取得に失敗しました。', 'error');
             }
         };
 
         fetchOrders();
-    }, []);
+    }, [toast]);
 
     const markAllAsRead = async () => {
         try {
@@ -35,6 +38,7 @@ export default function OrdersPage() {
             }
         } catch (error) {
             console.error('Failed to mark all as read:', error);
+            toast('既読の更新に失敗しました。', 'error');
         }
     };
 
@@ -51,10 +55,11 @@ export default function OrdersPage() {
             </div>
 
             <div className="bg-white rounded-xl border border-border overflow-hidden">
+                <div className="overflow-x-auto">
                 <table className="w-full">
                     <thead className="bg-muted/50 border-b border-border">
                         <tr>
-                            <th className="text-left p-4 font-medium text-muted-foreground">ID</th>
+                            <th className="text-left p-4 font-medium text-muted-foreground hidden md:table-cell">ID</th>
                             <th className="text-left p-4 font-medium text-muted-foreground">{t('productName')}</th>
                             <th className="text-left p-4 font-medium text-muted-foreground">{t('variantName')}</th>
                             <th className="text-left p-4 font-medium text-muted-foreground">Type</th>
@@ -71,7 +76,7 @@ export default function OrdersPage() {
                         ) : (
                             orders.map((order) => (
                                 <tr key={order.id} className="hover:bg-muted/50 transition-colors">
-                                    <td className="p-4 font-medium">#{order.id}</td>
+                                    <td className="p-4 font-medium hidden md:table-cell">#{order.id}</td>
                                     <td className="p-4">{order.productName}</td>
                                     <td className="p-4">{order.variantName}</td>
                                     <td className="p-4">
@@ -90,6 +95,7 @@ export default function OrdersPage() {
                         )}
                     </tbody>
                 </table>
+                </div>
             </div>
         </div>
     );

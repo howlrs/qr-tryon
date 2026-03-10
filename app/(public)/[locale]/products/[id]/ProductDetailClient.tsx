@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { ProductWithDetails, ProductVariant } from '@/types';
 import { ShoppingBag, Shirt } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { useToast } from '@/lib/hooks/useToast';
 
 interface ProductDetailClientProps {
     product: ProductWithDetails;
@@ -12,6 +13,7 @@ interface ProductDetailClientProps {
 
 export default function ProductDetailClient({ product }: ProductDetailClientProps) {
     const t = useTranslations('ProductDetail');
+    const { toast } = useToast();
     const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(
         product.variants[0] || null
     );
@@ -48,16 +50,16 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
             if (!res.ok) {
                 const data = await res.json();
                 if (res.status === 429) {
-                    alert(data.message || t('pleaseWait'));
+                    toast(data.message || t('pleaseWait'), 'warning');
                     return;
                 }
                 throw new Error('Request failed');
             }
 
-            alert(t('tryOnSent', { product: product.name, variant: selectedVariant.name }));
+            toast(t('tryOnSent', { product: product.name, variant: selectedVariant.name }), 'success');
         } catch (error) {
             console.error('Failed to send try on request:', error);
-            alert(t('failedToSend'));
+            toast(t('failedToSend'), 'error');
         }
     };
 
@@ -80,16 +82,16 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
             if (!res.ok) {
                 const data = await res.json();
                 if (res.status === 429) {
-                    alert(data.message || t('pleaseWait'));
+                    toast(data.message || t('pleaseWait'), 'warning');
                     return;
                 }
                 throw new Error('Request failed');
             }
 
-            alert(t('purchaseSent', { product: product.name, variant: selectedVariant.name }));
+            toast(t('purchaseSent', { product: product.name, variant: selectedVariant.name }), 'success');
         } catch (error) {
             console.error('Failed to send purchase request:', error);
-            alert(t('failedToSend'));
+            toast(t('failedToSend'), 'error');
         }
     };
 

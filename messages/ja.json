@@ -59,6 +59,7 @@
         "displayOrder": "表示順",
         "altText": "代替テキスト",
         "addImage": "画像を追加",
+        "dropImages": "画像をドラッグ＆ドロップ、またはクリックして選択",
         "required": "必須",
         "ordersTitle": "注文一覧",
         "noOrders": "注文が見つかりません",
@@ -67,6 +68,15 @@
         "purchase": "購入",
         "device": "端末",
         "time": "時間"
+    },
+    "Auth": {
+        "title": "管理者ログイン",
+        "description": "メールアドレスとパスワードを入力してください",
+        "email": "メールアドレス",
+        "password": "パスワード",
+        "login": "ログイン",
+        "loggingIn": "ログイン中...",
+        "loginFailed": "メールアドレスまたはパスワードが正しくありません"
     },
     "Common": {
         "loading": "読み込み中...",

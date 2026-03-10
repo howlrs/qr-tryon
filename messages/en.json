@@ -59,6 +59,7 @@
         "displayOrder": "Display Order",
         "altText": "Alt Text",
         "addImage": "Add Image",
+        "dropImages": "Drag & drop images here, or click to select",
         "required": "Required",
         "ordersTitle": "Customer Orders",
         "noOrders": "No orders found",
@@ -69,6 +70,15 @@
         "time": "Time",
         "productQrCode": "Product QR Code",
         "downloadQrCode": "Download QR Code"
+    },
+    "Auth": {
+        "title": "Admin Login",
+        "description": "Enter your email and password to continue",
+        "email": "Email",
+        "password": "Password",
+        "login": "Login",
+        "loggingIn": "Logging in...",
+        "loginFailed": "Invalid email or password"
     },
     "Common": {
         "loading": "Loading...",

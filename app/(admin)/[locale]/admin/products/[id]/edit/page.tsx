@@ -6,11 +6,13 @@ import { ArrowLeft } from 'lucide-react';
 import ProductForm, { ProductFormData } from '@/components/admin/ProductForm';
 import { mockProducts } from '@/lib/mockData';
 import { useTranslations } from 'next-intl';
+import { useToast } from '@/lib/hooks/useToast';
 
 export default function EditProductPage({ params }: { params: Promise<{ id: string }> }) {
     const router = useRouter();
     const t = useTranslations('Admin');
     const tCommon = useTranslations('Common');
+    const { toast } = useToast();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [initialData, setInitialData] = useState<ProductFormData | null>(null);
     const [isLoading, setIsLoading] = useState(true);
@@ -43,9 +45,9 @@ export default function EditProductPage({ params }: { params: Promise<{ id: stri
                     sku: v.sku
                 })),
                 images: product.images.map(img => ({
-                    image_url: img.image_url,
+                    url: img.image_url,
                     alt_text: img.alt_text || '',
-                    display_order: String(img.display_order)
+                    display_order: img.display_order
                 }))
             });
         }
@@ -65,8 +67,9 @@ export default function EditProductPage({ params }: { params: Promise<{ id: stri
                 stock: Number(v.stock)
             })),
             images: data.images.map(img => ({
-                ...img,
-                display_order: Number(img.display_order)
+                image_url: img.url,
+                alt_text: img.alt_text,
+                display_order: img.display_order
             }))
         };
 
@@ -75,7 +78,7 @@ export default function EditProductPage({ params }: { params: Promise<{ id: stri
         // Simulate delay
         await new Promise(resolve => setTimeout(resolve, 1000));
 
-        alert('Product updated successfully! (Check console for data)');
+        toast('Product updated successfully!', 'success');
         setIsSubmitting(false);
         router.push('/admin');
     };

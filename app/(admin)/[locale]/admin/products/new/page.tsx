@@ -5,10 +5,12 @@ import { Link, useRouter } from '@/i18n/routing';
 import { ArrowLeft } from 'lucide-react';
 import ProductForm, { ProductFormData } from '@/components/admin/ProductForm';
 import { useTranslations } from 'next-intl';
+import { useToast } from '@/lib/hooks/useToast';
 
 export default function AddProductPage() {
     const router = useRouter();
     const t = useTranslations('Admin');
+    const { toast } = useToast();
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleSubmit = async (data: ProductFormData) => {
@@ -23,8 +25,9 @@ export default function AddProductPage() {
                 stock: Number(v.stock)
             })),
             images: data.images.map(img => ({
-                ...img,
-                display_order: Number(img.display_order)
+                image_url: img.url,
+                alt_text: img.alt_text,
+                display_order: img.display_order
             }))
         };
 
@@ -33,7 +36,7 @@ export default function AddProductPage() {
         // Simulate delay
         await new Promise(resolve => setTimeout(resolve, 1000));
 
-        alert('Product created successfully! (Check console for data)');
+        toast('Product created successfully!', 'success');
         setIsSubmitting(false);
         router.push('/admin');
     };
